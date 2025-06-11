@@ -2,7 +2,7 @@
 
 uTravel is an intelligent travel planning assistant that helps users create personalized travel itineraries through natural conversation. Powered by Google's Gemini Pro LLM and integrated with real-time data from Google Maps and OpenWeatherMap APIs, uTravel provides dynamic, context-aware travel planning.
 
-## ✨ Features
+## Features
 
 - **Natural Conversation Interface**: Interact with the AI assistant using natural language
 - **Real-time Data Integration**:
@@ -17,7 +17,7 @@ uTravel is an intelligent travel planning assistant that helps users create pers
 - **Interactive Refinement**: Modify and refine plans through conversation
 - **Structured Output**: Generates well-organized, detailed itineraries
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -31,8 +31,8 @@ uTravel is an intelligent travel planning assistant that helps users create pers
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/travel-planner.git
-   cd travel-planner
+   git clone https://github.com/hongrzhu/uTravel.git
+   cd uTravel
    ```
 
 2. Create and activate a virtual environment:
@@ -67,10 +67,10 @@ You: I'd like a 3-day trip to Paris focusing on museums and cafes, mid-range bud
 uTravel: I'll help you plan your Paris adventure! Let me gather some information about attractions and check the weather forecast...
 ```
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
-travel-planner/
+uTravel/
 ├── src/
 │   └── travel_planner/
 │       ├── core/
@@ -89,7 +89,7 @@ travel-planner/
 └── README.md                     # This file
 ```
 
-## 🔧 Technical Details
+## Technical Details
 
 - **LLM Integration**: Uses Google's Gemini Pro model through LangChain
 - **State Management**: Implements a state-based conversation system
@@ -99,8 +99,8 @@ travel-planner/
 - **Error Handling**: Robust error handling and graceful degradation
 - **Logging**: Comprehensive logging system for debugging
 
-## 🎯 Future Improvements
-
+## Future Improvements
+- [ ] Agent workflow optimization
 - [ ] Web-based user interface
 - [ ] User profile and preference storage
 - [ ] Integration with booking services
@@ -111,15 +111,11 @@ travel-planner/
 - [ ] Trip cost estimation
 - [ ] Real-time updates for weather and traffic
 
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## 📝 License
+## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - Google Gemini Pro for the LLM capabilities
 - Google Maps Platform for location services
