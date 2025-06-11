@@ -83,9 +83,12 @@ uTravel/
 │       │   ├── __init__.py
 │       │   └── settings.py       # Configuration and constants
 │       └── __main__.py           # Application entry point
+├── frontend/                     # Future web interface development
+├── backend/                      # Future backend service development
 ├── tests/                        # Test directory
 ├── docs/                         # Documentation
 ├── requirements.txt              # Project dependencies
+├── setup.py                      # Package installation configuration
 └── README.md                     # This file
 ```
 
