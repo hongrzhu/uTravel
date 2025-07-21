@@ -26,7 +26,7 @@ class PlannerAgent:
             
         try:
             return ChatGoogleGenerativeAI(
-                model="gemini-1.5-pro-latest",
+                model="gemini-2.5-pro",
                 temperature=0.7,
                 google_api_key=api_key,
                 safety_settings={
