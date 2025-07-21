@@ -1,30 +1,29 @@
 """
 External API tools for the travel planning system.
+Provides tools for weather forecasts, place discovery, and travel information.
+
+Tools:
+- get_weather_forecast: Get weather forecast for a specific location and date
+- find_places_nearby: Find places of interest in a city based on criteria
+- get_travel_info: Get travel time and distance between two points
+
+Helper Functions:
+- map_price_level: Convert numeric price levels to dollar sign representation
 """
 
-import logging
-from typing import Dict, Any, List, Optional
-from datetime import datetime, timezone
+from typing import List, Dict, Any, Optional
+from langchain_core.tools import tool
 import requests
 import json
-import googlemaps
-from langchain_core.tools import tool
+from datetime import datetime, timezone
 
 from ..config.settings import (
-    OWM_ONECALL_ENDPOINT,
     WEATHER_API_KEY,
-    MAPS_API_KEY
+    OWM_ONECALL_ENDPOINT,
+    gmaps,
+    gmaps_active,
+    logging
 )
-
-# Initialize Google Maps client
-try:
-    gmaps = googlemaps.Client(key=MAPS_API_KEY)
-    gmaps_active = True
-    logging.info("Google Maps client initialized successfully.")
-except Exception as e:
-    logging.error(f"Failed to initialize Google Maps client: {e}")
-    gmaps = None
-    gmaps_active = False
 
 def map_price_level(level: Optional[int]) -> str:
     """Maps Google Places price level (0-4) to $, $$, $$$ etc."""

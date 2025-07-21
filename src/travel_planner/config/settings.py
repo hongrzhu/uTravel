@@ -5,6 +5,22 @@ Configuration settings and constants for the travel planning system.
 import os
 import logging
 from typing import Optional
+from langchain_google_genai import HarmBlockThreshold, HarmCategory
+import googlemaps
+from google.api_core import exceptions as google_exceptions
+
+try:
+    from kaggle_secrets import UserSecretsClient
+    user_secrets = UserSecretsClient()
+    GEMINI_API_KEY = user_secrets.get_secret("GEMINI_API_KEY")
+    MAPS_API_KEY = user_secrets.get_secret("MAPS_API_KEY")
+    WEATHER_API_KEY = user_secrets.get_secret("WEATHER_API_KEY")
+    logging.info("Successfully retrieved API keys from Kaggle Secrets.")
+except Exception as e:
+    logging.warning(f"Could not retrieve keys from Kaggle Secrets (may be normal outside Kaggle): {e}")
+    GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
+    MAPS_API_KEY = os.environ.get("MAPS_API_KEY")
+    WEATHER_API_KEY = os.environ.get("WEATHER_API_KEY")
 
 # API Keys
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
@@ -54,8 +70,10 @@ def validate_api_keys() -> bool:
     
     if not GEMINI_API_KEY:
         missing_keys.append("GEMINI_API_KEY")
+        logging.error("GEMINI_API_KEY not found. LLM will not function.")
     if not MAPS_API_KEY:
         missing_keys.append("MAPS_API_KEY")
+        logging.warning("MAPS_API_KEY not found. Google Maps features will fail or use dummy data.")
     if not WEATHER_API_KEY:
         missing_keys.append("WEATHER_API_KEY")
         
@@ -63,4 +81,30 @@ def validate_api_keys() -> bool:
         logging.error(f"Missing required API keys: {', '.join(missing_keys)}")
         return False
         
-    return True 
+    return True
+
+# --- Google Maps Client Setup ---
+try:
+    gmaps = googlemaps.Client(key=MAPS_API_KEY)
+    if "YOUR_MAPS_API_KEY" in MAPS_API_KEY:
+         logging.warning("Using placeholder Google Maps API key. Maps calls will fail.")
+         gmaps_active = False
+    else:
+         gmaps_active = True
+         logging.info("Google Maps client initialized successfully.")
+except Exception as e:
+    logging.error(f"Failed to initialize Google Maps client: {e}")
+    gmaps = None
+    gmaps_active = False
+
+# --- LLM Configuration ---
+GEMINI_MODEL_CONFIG = {
+    "model": "gemini-2.5-pro",
+    "temperature": 0.7,
+    "safety_settings": {
+        HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
+        HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
+        HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,
+        HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
+    }
+}
