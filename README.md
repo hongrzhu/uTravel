@@ -1,4 +1,4 @@
-# 🌍 uTravel: AI-Powered Travel Planning Assistant
+# uTravel: LLM-Powered Personalized Travel Planning Assistant
 
 uTravel is an intelligent travel planning assistant that helps users create personalized travel itineraries through natural conversation. Powered by Google's Gemini Pro LLM and integrated with real-time data from Google Maps and OpenWeatherMap APIs, uTravel provides dynamic, context-aware travel planning.
 
@@ -75,7 +75,10 @@ uTravel/
 │   └── travel_planner/
 │       ├── core/
 │       │   ├── __init__.py
-│       │   └── agent.py          # Main planner agent implementation
+│       │   ├──  agent.py          # Core planner agent implementation
+│       │   ├──  graph.py          # LangGraph workflow definition
+│       │   ├──  nodes.py          # Node definitions for the LangGraph workflow
+│       │   └──  state.py          # State definitions
 │       ├── utils/
 │       │   ├── __init__.py
 │       │   └── tools.py          # External API integrations
@@ -83,12 +86,9 @@ uTravel/
 │       │   ├── __init__.py
 │       │   └── settings.py       # Configuration and constants
 │       └── __main__.py           # Application entry point
-├── frontend/                     # Future web interface development
-├── backend/                      # Future backend service development
-├── tests/                        # Test directory
-├── docs/                         # Documentation
+├── backend/                      # Backend service development
 ├── requirements.txt              # Project dependencies
-├── setup.py                      # Package installation configuration
+├── setup.sh                      # Environment setup and package installation
 └── README.md                     # This file
 ```
 
@@ -112,11 +112,7 @@ uTravel/
 - [ ] Offline mode with cached data
 - [ ] Social sharing features
 - [ ] Trip cost estimation
-- [ ] Real-time updates for weather and traffic
 
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Acknowledgments
 
