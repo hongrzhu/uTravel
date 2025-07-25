@@ -1,4 +1,4 @@
-# uTravel: LLM-Powered Personalized Travel Planning Assistant
+# uTravel: An LLM-Powered Personalized Travel Planning Assistant
 
 uTravel is an intelligent travel planning assistant that helps users create personalized travel itineraries through natural conversation. Powered by Google's Gemini Pro LLM and integrated with real-time data from Google Maps and OpenWeatherMap APIs, uTravel provides dynamic, context-aware travel planning.
 
